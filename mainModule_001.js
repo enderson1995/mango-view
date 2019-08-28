@@ -1,28 +1,28 @@
 define([
     'angular', 
     'require',
-    './components/helloWorld.js'
+    './components/overview.js'
 ], 
-function(angular, require, helloWorld) {
+function(angular, require, overview) {
 'use strict';
 var mainModule = angular.module('userModule', ['maUiApp']);
-    mainModule.component('helloWorld', helloWorld);
+    mainModule.component('overview', overview);
     mainModule.config(['maUiMenuProvider', function(maUiMenuProvider) {
         maUiMenuProvider.registerMenuItems([
             {
-                name: 'ui.helloWorld',
-                url: '/hello-world',
+                name: 'ui.monitorBuilding',
+                url: '/monitor-building',
                 menuText: 'Monitor Building',
-                menuIcon: 'accessibility_new',
+                menuIcon: 'location_city',
                 abstract: true,
                 menuHidden: false,
                 weight: 996,
             },
             {
-                name: 'ui.helloWorld.a',
-                url: '/home',
-                template: '<hello-world></hello-world>',
-                menuIcon: 'fa-home',
+                name: 'ui.monitorBuilding.aOverview',
+                url: '/overview',
+                template: '<overview></overview>',
+                menuIcon: 'room',
                 menuText: 'Overview',
                 weight: 997,
                 params: {
@@ -31,10 +31,10 @@ var mainModule = angular.module('userModule', ['maUiApp']);
                 },
             },
             {
-                name: 'ui.helloWorld.Building',
-                url: '/home',
-                template: '<hello-world></hello-world>',
-                menuIcon: 'fa-home',
+                name: 'ui.monitorBuilding.Building',
+                url: '/building',
+                template: '<overview></overview>',
+                menuIcon: 'data_usage',
                 menuText: 'Building',
                 weight: 997,
                 params: {
@@ -43,10 +43,10 @@ var mainModule = angular.module('userModule', ['maUiApp']);
                 },
             },
             {
-                name: 'ui.helloWorld.c',
-                url: '/home',
-                template: '<hello-world></hello-world>',
-                menuIcon: 'fa-home',
+                name: 'ui.monitorBuilding.cAparment',
+                url: '/apartment',
+                template: '<overview></overview>',
+                menuIcon: 'view_headline',
                 menuText: 'Apartment',
                 weight: 997,
                 params: {
@@ -55,10 +55,10 @@ var mainModule = angular.module('userModule', ['maUiApp']);
                 },
             },
             {
-                name: 'ui.helloWorld.Events',
-                url: '/home',
-                template: '<hello-world></hello-world>',
-                menuIcon: 'fa-home',
+                name: 'ui.monitorBuilding.Events',
+                url: '/events',
+                template: '<overview></overview>',
+                menuIcon: 'access_alarm',
                 menuText: 'Events',
                 weight: 997,
                 params: {
@@ -66,6 +66,7 @@ var mainModule = angular.module('userModule', ['maUiApp']);
                     hideFooter: false,
                 },
             },
+            
         ]);
     }]);
     return mainModule;
