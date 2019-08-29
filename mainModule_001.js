@@ -1,12 +1,18 @@
 define([
     'angular', 
     'require',
-    './components/overview.js'
+    './components/js/overview.js',
+    './components/js/building.js',
+    './components/js/apartment.js',
+    './components/js/events.js'
 ], 
-function(angular, require, overview) {
+function(angular, require, overview, building, apartment,events) {
 'use strict';
 var mainModule = angular.module('userModule', ['maUiApp']);
     mainModule.component('overview', overview);
+    mainModule.component('building', building);
+    mainModule.component('apartment', apartment);
+    mainModule.component('events', events);
     mainModule.config(['maUiMenuProvider', function(maUiMenuProvider) {
         maUiMenuProvider.registerMenuItems([
             {
@@ -33,7 +39,7 @@ var mainModule = angular.module('userModule', ['maUiApp']);
             {
                 name: 'ui.monitorBuilding.Building',
                 url: '/building',
-                template: '<overview></overview>',
+                template: '<building></building>',
                 menuIcon: 'data_usage',
                 menuText: 'Building',
                 weight: 997,
@@ -45,7 +51,7 @@ var mainModule = angular.module('userModule', ['maUiApp']);
             {
                 name: 'ui.monitorBuilding.cAparment',
                 url: '/apartment',
-                template: '<overview></overview>',
+                template: '<apartment></apartment>',
                 menuIcon: 'view_headline',
                 menuText: 'Apartment',
                 weight: 997,
@@ -57,7 +63,7 @@ var mainModule = angular.module('userModule', ['maUiApp']);
             {
                 name: 'ui.monitorBuilding.Events',
                 url: '/events',
-                template: '<overview></overview>',
+                template: '<events></events>',
                 menuIcon: 'access_alarm',
                 menuText: 'Events',
                 weight: 997,

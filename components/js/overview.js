@@ -9,7 +9,7 @@ this.$onInit = () => {
 return {
     bindings: {},
     controller: HelloWorldController,
-    templateUrl: require.toUrl('./overview.html')
+    templateUrl: require.toUrl('../html/overview.html')
 };
     
 });
