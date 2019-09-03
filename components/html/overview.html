@@ -5,22 +5,29 @@
     <table md-table md-row-select multiple ng-model="page.selected" md-progress="promise">
         <thead md-head md-order="query.order">
         <tr md-row>
-            <th md-column md-order-by="deviceName">Device name</th>
-            <th md-column md-order-by="name">Point name</th>
-            <th md-column md-order-by="xid">XID</th>
+            <th md-column md-order-by="buildingName">Building Name</th>
+            <th md-column md-order-by="instantaneousDemand">Instantaneous Demand</th>
+            <th md-column md-order-by="totalEnergy">Total Energy</th>
+            <th md-column md-order-by="totalCost">Total Cost</th>
+            <th md-column md-order-by="nextBill">Next Bill</th>
+            
         </tr>
         </thead>
         <tbody md-body>
-        <tr md-row md-select="point" md-select-id="id" md-auto-select ng-repeat="point in points">
-            <td md-cell>{{point.deviceName}}</td>
-            <td md-cell>{{point.name}}</td>
-            <td md-cell>{{point.xid}}</td>
+        <tr md-row md-select="site" md-select-id="id" md-auto-select ng-repeat="site in $ctrl.building">
+            <td md-cell>{{site}}</td>       
+            <td md-cell>{{point.instantaneousDemand}}</td>
+            <td md-cell>{{point.totalEnergy}}</td>
+            <td md-cell>{{point.totalCost}}</td>
+            <td md-cell>{{point.totalBill}}</td>
         </tr>
         </tbody>
     </table>
 </md-table-container>
+
+
         </md-card-content>
-        
+
     </md-card>
     <divf flex="40">
     <md-card >
@@ -60,4 +67,7 @@
         </md-card-content>
     </md-card>
 </div>    
+</div>
+<div>
+<h1 ng-repeat="building in $ctrl.building">aqui: {{building}}</h1>   
 </div>
