@@ -1,6 +1,62 @@
 <md-card>
     <md-card-content>
-        <h1>{{$ctrl.helloWorld}}</h1>
-        <h2 ng-repeat="site in $ctrl.building" >en {{site}}</h2>
+
     </md-card-content>
+
+
+    <md-card>
+        <md-card-content>
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                        <tr>
+
+                            <th md-column> Pressure </th>
+                            <th md-column> Flow </th>
+                            <th md-column> Voltage </th>
+                            <th md-column> Current </th>
+                            <th md-column> Power </th>
+
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr ng-repeat="(build,site) in $ctrl.buildingPoints"">
+
+                            <td>
+                                <ma-get-point-value point="site.powerTotal"></ma-get-point-value>
+                                <p> &nbsp &nbsp &nbsp {{ site.powerTotal.renderedValue }} </p>
+                            </td>
+
+                            <td>
+                                <ma-get-point-value point="pump.flow"></ma-get-point-value>
+                                <p> {{ pump.flow.renderedValue }} </p>
+                            </td>
+
+                            <td>
+                                <ma-get-point-value point="pump.voltage"></ma-get-point-value>
+                                <p> {{ pump.voltage.renderedValue }} </p>
+                            </td>
+
+                            <td>
+                                <ma-get-point-value point="pump.current"></ma-get-point-value>
+                                <p> {{ pump.current.renderedValue }} </p>
+                            </td>
+
+                            <td>
+                                <ma-get-point-value point="pump.power"></ma-get-point-value>
+                                <p> {{ pump.power.renderedValue }} </p>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Para seleccionar páginas -->
+                <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 20]"
+                    md-page="query.page" md-total="{{points.$total}}" md-page-select>
+                </md-table-pagination>
+            </md-table-container>
+        </md-card-content>
+    </md-card>
+
 </md-card>
