@@ -1,12 +1,89 @@
 <div>
     <h2>Energy Dasboard</h2>
 </div>
-<md-card>
+<!-- Codigo asociado a seleccionar el lugar -->
+<md-card flex>
     <md-card-content>
-
+        <div layout="row" layout-align="space-between start" layout-wrap>
+            <md-input-container flex="100" flex-gt-xs="40">
+                <label>Select building:</label>
+                <md-select ng-model="$ctrl.site" ng-change="$ctrl.siteChanged()">
+                    <md-option ng-repeat="(build,site) in $ctrl.building" value="{{site}}">
+                        {{site}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
     </md-card-content>
+</md-card>
 
+<div layout="row">
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Instantaneous Demand</h2>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+          <h2>Card headline</h2>
+          <p>Card content</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+    </md-card>
 
+    <md-card flex="50" class="md-hue-2">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                        <h2 flex md-truncate layout-align="center">Maximun Demand</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+              <h2>Card headline</h2>
+              <p>Card content</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Action 1</md-button>
+              <md-button>Action 2</md-button>
+            </md-card-actions>
+        </md-card>
+
+        <md-card flex="50" class="md-hue-2">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                        <h2 flex md-truncate layout-align="center">Total Energy</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+              <h2>Card headline</h2>
+              <p>Card content</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Action 1</md-button>
+              <md-button>Action 2</md-button>
+            </md-card-actions>
+        </md-card>
+    
+        <md-card flex="50" class="md-hue-2">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                        <h2 flex md-truncate layout-align="center">Total Cost</h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+              <h2>Card headline</h2>
+              <p>Card content</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Action 1</md-button>
+              <md-button>Action 2</md-button>
+            </md-card-actions>
+        </md-card>
+</div>
+
+<md-card>
     <md-card>
         <md-card-content>
             <md-table-container>
