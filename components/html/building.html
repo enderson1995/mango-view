@@ -17,70 +17,54 @@
     </md-card-content>
 </md-card>
 
-<div layout="row">
+<div layout="row" ng-repeat="(build,site) in $ctrl.buildingPoints">
     <md-card flex="50" class="md-hue-2">
         <md-toolbar>
             <div class="md-toolbar-tools">
                     <h2 flex md-truncate layout-align="center">Instantaneous Demand</h2>
             </div>
         </md-toolbar>
-        <md-card-content>
-          <h2>Card headline</h2>
-          <p>Card content</p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
+        <div layout="row">
+            <ma-svg ng-include="'/modules/mangoUI/web/img/Rayo.svg'" flex="40"></ma-svg>
+            <md-card-content >
+                <ma-get-point-value point="site.powerTotal"></ma-get-point-value>
+                <p> {{ site.powerTotal.renderedValue }} </p>
+            </md-card-content>
+        </div>
+
+    </md-card>
+
+    <md-card flex="50" class="md-hue-2" >
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Maximun Demand</h2>
+            </div>
+        </md-toolbar>
+        
     </md-card>
 
     <md-card flex="50" class="md-hue-2">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                        <h2 flex md-truncate layout-align="center">Maximun Demand</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-              <h2>Card headline</h2>
-              <p>Card content</p>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Total Energy</h2>
+            </div>
+        </md-toolbar>
+        <div layout="row">
+            <ma-svg ng-include="'/modules/mangoUI/web/img/Rayo.svg'" flex="40"></ma-svg>
+            <md-card-content >
+                <ma-get-point-value point="site.energyTotal"></ma-get-point-value>
+                <p> {{ site.energyTotal.renderedValue }} </p>
             </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button>Action 1</md-button>
-              <md-button>Action 2</md-button>
-            </md-card-actions>
-        </md-card>
-
-        <md-card flex="50" class="md-hue-2">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                        <h2 flex md-truncate layout-align="center">Total Energy</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-              <h2>Card headline</h2>
-              <p>Card content</p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button>Action 1</md-button>
-              <md-button>Action 2</md-button>
-            </md-card-actions>
-        </md-card>
+        </div>
+    </md-card>
     
-        <md-card flex="50" class="md-hue-2">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                        <h2 flex md-truncate layout-align="center">Total Cost</h2>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-              <h2>Card headline</h2>
-              <p>Card content</p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button>Action 1</md-button>
-              <md-button>Action 2</md-button>
-            </md-card-actions>
-        </md-card>
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Total Cost</h2>
+            </div>
+        </md-toolbar>
+    </md-card>
 </div>
 
 <md-card>
@@ -100,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody md-body>
-                        <tr ng-repeat="(build,site) in $ctrl.buildingPoints"">
+                        <tr ng-repeat="(build,site) in $ctrl.buildingPoints">
 
                             <td>
                                 <ma-get-point-value point="site.powerTotal"></ma-get-point-value>
