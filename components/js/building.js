@@ -55,16 +55,44 @@ define(['angular', 'require'], function(angular, require) {
             //Crear variables a mostrar
             this.sites.forEach(building => {
                 this.buildingPoints[building] = {
+                    'power1' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '1'),
+                    'power2' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '2'),
+                    'power3' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '3'),
                     'powerTotal' : this.filterByNameAndBuilding(points, 'powerTotal',this.site),
                     'energyTotal' : this.filterByNameAndBuilding(points, 'energyTotal',this.site),
+                    'costTotal' : this.filterByNameAndBuilding(points, 'costTotal',this.site),
+                    'maximumValue' : this.filterByNameAndBuilding(points, 'maximumValue',this.site),
+                    'vLineNeutral1' : this.filterByNameAndBuildingAndLine(points, 'vLineToNeutral',this.site,'1'),
+                    'vLineNeutral2' : this.filterByNameAndBuildingAndLine(points, 'vLineToNeutral',this.site,'2'),
+                    'vLineNeutral3' : this.filterByNameAndBuildingAndLine(points, 'vLineToNeutral',this.site,'3'),
+                    'vLineNeutralAverage' : this.filterByNameAndBuildingAndLine(points, 'vLineToNeutral',this.site,'Average'),
+                    'vLineLine1' : this.filterByNameAndBuildingAndLine(points, 'vLineToLine',this.site,'12'),
+                    'vLineLine2' : this.filterByNameAndBuildingAndLine(points, 'vLineToLine',this.site,'23'),
+                    'vLineLine3' : this.filterByNameAndBuildingAndLine(points, 'vLineToLine',this.site,'31'),
+                    'vLineLineAverage' : this.filterByNameAndBuildingAndLine(points, 'vLineToLine',this.site,'Average'),
+                    'current1' : this.filterByNameAndBuildingAndLine(points, 'Current',this.site,'1'),
+                    'current2' : this.filterByNameAndBuildingAndLine(points, 'Current',this.site,'2'),
+                    'current3' : this.filterByNameAndBuildingAndLine(points, 'Current',this.site,'3'),
+                    'currentAverage' : this.filterByNameAndBuildingAndLine(points, 'Current',this.site,'Total'),
+                    'fp1' : this.filterByNameAndBuildingAndLine(points, 'FP',this.site,'1'),
+                    'fp2' : this.filterByNameAndBuildingAndLine(points, 'FP',this.site,'2'),
+                    'fp3' : this.filterByNameAndBuildingAndLine(points, 'FP',this.site,'3'),
+                    'fpAverage' : this.filterByNameAndBuildingAndLine(points, 'FP',this.site,'Average'),
                 };
-                
+                console.log(this.buildingPoints)
+                console.log(points)
             });
         };
 
         this.filterByNameAndBuilding = (points, name, building) => {
             return points.filter(point => {
                 return point.name == name && point.tags.building == building;
+            })[0];
+        };
+
+        this.filterByNameAndBuildingAndLine = (points, name, building, line) => {
+            return points.filter(point => {
+                return point.name == name && point.tags.building == building && point.tags.line == line; 
             })[0];
         };
     }
