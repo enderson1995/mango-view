@@ -1,5 +1,45 @@
-<md-card>
+<md-card flex>
     <md-card-content>
-        <h1>{{$ctrl.helloWorld}}</h1>
+        <div layout="row" layout-align="space-between start" >
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select building:</label>
+                <md-select ng-model="$ctrl.site" ng-change="$ctrl.siteChanged()">
+                    <md-option ng-repeat="(build,site) in $ctrl.building" value="{{site}}">
+                        {{site}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select floor:</label>
+                <md-select ng-model="$ctrl.floor" ng-change="$ctrl.floorChanged()">
+                    <md-option ng-repeat="(build,floor) in $ctrl.floors" value="{{floor}}">
+                        {{floor}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select apartment:</label>
+                <md-select ng-model="$ctrl.apartment" ng-change="$ctrl.apartmentChanged()">
+                    <md-option ng-repeat="(build,apartment) in $ctrl.apartments" value="{{apartment}}">
+                        {{apartment}}
+                    </md-option>
+                </md-select>
+            </md-input-container>    
+
+        </div>
     </md-card-content>
 </md-card>
+
+<div layout='row'>
+    <md-card flex="40">
+dasdasd
+    </md-card>
+    <md-card flex="">
+        asdasdasdas
+    </md-card>
+</div>
+
+    
