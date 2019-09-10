@@ -15,7 +15,7 @@ define(['angular', 'require'], function(angular, require) {
                 .query()
                 .then(values => {
                     this.building = values.sort();
-                    console.log(this.building)
+
                     this.siteChanged();
                 })
         };
@@ -62,7 +62,7 @@ define(['angular', 'require'], function(angular, require) {
         this.floorChanged = () => {
             $stateParams.floor = this.floor;
             $state.go('.', $stateParams, {location: 'replace', notify: false});
-            console.log(this.floor)
+            
             this.refreshApartment();
         };
 
@@ -85,6 +85,8 @@ define(['angular', 'require'], function(angular, require) {
                         this.apartment = null;
                     }
                     this.apartmentChanged();
+                }else {
+                    this.apartmentChanged();
                 }
             }
 
@@ -92,21 +94,49 @@ define(['angular', 'require'], function(angular, require) {
         };
 
         this.apartmentChanged = () => {
+            this.sites = [];
             $stateParams.apartment = this.apartment;
             $state.go('.', $stateParams, {location: 'replace', notify: false});
-            console.log(this.floor)
-            return maPoint
-            .buildQuery()
-            .eq('tags.building', this.site)
-            .limit(1000)
-            .query()
-            .then((points) => { 
-                this.orderPoints(points);
-            });
+            this.sites.unshift(this.site);
+
+            this.dataPoint();
+        };
+
+        this.dataPoint = () => {
+            let queryBuilder = maPoint.buildQuery();
+            this.apartmentPoints = [];
+    
+            return queryBuilder
+                .limit(1000)
+                .eq('tags.building', this.site)
+                .eq('tags.floor', this.floor)
+                .eq('tags.apartment', this.apartment)
+                .query()
+                .then((points) => {     
+                    this.orderPoints(points);   
+
+                });
         };
 
         this.orderPoints = (points) => {
             console.log(points)
+            //Crear variables a mostrar
+
+            this.sites.forEach(site => {
+
+                this.vLineToNeutralAverage = this.filterByName(points, 'vLineToNeutralAverage');
+                this.powerTotal = this.filterByName(points, 'powerTotal');
+                this.energyTotal = this.filterByName(points, 'energyTotal');
+                this.costTotal = this.filterByName(points, 'costTotal');
+
+                console.log(this.vLineToNeutralAverage)
+            });
+        };
+
+        this.filterByName = (points, name) => {
+            return points.filter(point => {
+                return point.name == name;
+            })[0];
         };
     }
     return {

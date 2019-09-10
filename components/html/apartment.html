@@ -33,13 +33,71 @@
     </md-card-content>
 </md-card>
 
-<div layout='row'>
-    <md-card flex="40">
-dasdasd
+<div layout='row' >
+    <md-card flex="40"  class="layout-column" >
+        <md-card-content layout="column">
+
+            <div layout ="row">
+                Energy for period 
+                <span flex="40" class="flex"></span>
+                <ma-point-value point="$ctrl.energyTotal"></ma-point-value>
+            </div>
+            <div layout ="row">
+                Cost for period  &nbsp  &nbsp 
+                <span flex="40" class="flex"></span>
+                <ma-point-value point="$ctrl.costTotal"></ma-point-value> &nbsp EEUU
+            </div>
+            <div layout ="row">
+                Active power total
+                <span flex="40" class="flex"></span>
+                <ma-point-value point="$ctrl.powerTotal"></ma-point-value> 
+            </div>
+            
+        </md-card-content>
     </md-card>
+
     <md-card flex="">
-        asdasdasdas
+        <md-card-content>
+            <ma-point-values 
+                point="$ctrl.energyTotal" 
+                values="$ctrl.energyTotalValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">            
+            </ma-point-values>
+
+            <ma-point-values 
+                point="$ctrl.costTotal" 
+                values="$ctrl.costTotalValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">            
+            </ma-point-values>
+
+            <ma-point-values 
+                point="$ctrl.vLineToNeutralAverage" 
+                values="$ctrl.vLineToNeutralAverageValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+            </ma-point-values>
+
+            <ma-serial-chart style="height: 480px; width: 100%"
+                series-1-values="$ctrl.energyTotalValues"
+                series-1-point="$ctrl.energyTotal"
+                series-1-title="Energy (Wh)"
+                series-2-values="$ctrl.costTotalValues"
+                series-2-point="$ctrl.costTotal"
+                series-2-title="Cost Total"
+                series-3-values="$ctrl.vLineToNeutralAverageValues"
+                series-3-point="$ctrl.vLineToNeutralAverage"
+                series-3-title="V line to neutral"
+                legend="true">
+            </ma-serial-chart>
+        </md-card-content>
     </md-card>
 </div>
 
-    
