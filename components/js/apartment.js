@@ -52,8 +52,10 @@ define(['angular', 'require'], function(angular, require) {
                     }else {
                         this.floor = null;
                     }
-                    this.floorChanged();
-                }
+                };
+                
+                this.floorChanged();
+                
             }
 
             )
@@ -128,7 +130,9 @@ define(['angular', 'require'], function(angular, require) {
                 this.powerTotal = this.filterByName(points, 'powerTotal');
                 this.energyTotal = this.filterByName(points, 'energyTotal');
                 this.costTotal = this.filterByName(points, 'costTotal');
-                this.status = false;
+                this.status  = this.filterByName(points, 'status');
+                this.pastDuePayment = this.filterByName(points, 'pastDuePayment');
+                this.nextValue = this.filterByName(points, 'nextValue')
 
                 console.log(this.status)
             });

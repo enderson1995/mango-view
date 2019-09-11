@@ -39,45 +39,46 @@
 
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Energy for period</h4> 
-                <span flex="20" class="flex"></span>
+                <span flex="35" class="flex"></span>
                 <ma-get-point-value point="$ctrl.energyTotal"></ma-get-point-value>
                 <h4>{{$ctrl.energyTotal.renderedValue}}</h4>
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Cost for period  &nbsp  &nbsp</h4> 
-                <span flex="20" class="flex"></span>
+                <span flex="35" class="flex"></span>
                 <ma-get-point-value point="$ctrl.costTotal"></ma-get-point-value> 
                 <h4>{{$ctrl.costTotal.renderedValue}}&nbsp EEUU</h4>
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Conection status</h4>
-                <span flex="25" class="flex"></span>
+                <span flex="40" class="flex"></span>
                 <ma-get-point-value point="$ctrl.status"></ma-get-point-value>
-                <h4 ng-if="@ctrl.status">valor</h4> 
+                <ma-svg ng-if="$ctrl.status.value" ng-include="'/modules/mangoUI/web/img/verde.svg'" flex="15"></ma-svg>
+                <ma-svg ng-if="!$ctrl.status.value" ng-include="'/modules/mangoUI/web/img/rojo.svg'" flex="15"></ma-svg>
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Next bill</h4>
-                <span flex="45" class="flex"></span>
-                <ma-get-point-value point="$ctrl.powerTotal"></ma-get-point-value>
-                <h4>09/ 11/ 2019</h4> 
+                <span flex="50" class="flex"></span>
+                <ma-get-point-value point="$ctrl.nextValue"></ma-get-point-value>
+                <h4>{{$ctrl.nextValue.value}}</h4> 
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Past due payment</h4>
-                <span flex="25" class="flex"></span>
-                <ma-get-point-value point="$ctrl.powerTotal"></ma-get-point-value>
-                <h4>0</h4> 
+                <span flex="45" class="flex"></span>
+                <ma-get-point-value point="$ctrl.pastDuePayment"></ma-get-point-value>
+                <h4>{{$ctrl.pastDuePayment.value}}</h4> 
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Line to neutral average</h4>
-                <span flex="25" class="flex"></span>
+                <span flex="30" class="flex"></span>
                 <ma-get-point-value point="$ctrl.vLineToNeutralAverage"></ma-get-point-value>
                 <h4 >{{$ctrl.vLineToNeutralAverage.renderedValue}}</h4> 
             </div>
             <div layout ="row" layout-padding="5" layout-aling="start center">
                 <h4>Active power total</h4>
-                <span flex="25" class="flex"></span>
+                <span flex="35" class="flex"></span>
                 <ma-get-point-value point="$ctrl.powerTotal"></ma-get-point-value>
-                <h4>{{$ctrl.powerTotal.renderedValue}}</h4> 
+                <h4>&nbsp  {{$ctrl.powerTotal.renderedValue}}</h4> 
             </div>
             
         </md-card-content>
