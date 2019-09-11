@@ -37,6 +37,7 @@ define(['angular', 'require'], function(angular, require) {
             this.building.forEach(building => {
                 this.buildingPoints[building] = {
                     'powerTotal' : this.filterByNameAndBuilding(points, 'powerTotal',building),
+                    'energyTotal' : this.filterByNameAndBuilding(points, 'energyTotal',building),
                 };
                 
             });
