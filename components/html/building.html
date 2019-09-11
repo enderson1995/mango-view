@@ -1,0 +1,403 @@
+<div>
+    <h2>Energy Dasboard</h2>
+</div>
+<!-- Codigo asociado a seleccionar el lugar -->
+<md-card flex>
+    <md-card-content>
+        <div layout="row" layout-align="space-between start" layout-wrap>
+            <md-input-container flex="100" flex-gt-xs="40">
+                <label>Select building:</label>
+                <md-select ng-model="$ctrl.site" ng-change="$ctrl.siteChanged()">
+                    <md-option ng-repeat="(build,site) in $ctrl.building" value="{{site}}">
+                        {{site}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+</md-card>
+
+<div layout="row" ng-repeat="(build,site) in $ctrl.buildingPoints">
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Instantaneous Demand</h2>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-margin="5">
+
+                <ma-svg ng-include="'/modules/mangoUI/web/img/Rayo.svg'" flex="40"></ma-svg>
+
+            <md-card-content layout-margin="5">
+
+                <ma-get-point-value point="site.powerTotal"></ma-get-point-value>
+                <h4 > {{ site.powerTotal.renderedValue }} </h4>
+ 
+            </md-card-content>
+        </div>
+
+    </md-card>
+
+    <md-card flex="50" class="md-hue-2" >
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Maximum Demand</h2>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-margin="5">
+            <ma-svg ng-include="'/modules/mangoUI/web/img/Bombillo.svg'" flex="40"></ma-svg>
+            <md-card-content layout-margin="5">
+                <ma-get-point-value point="site.maximumValue"></ma-get-point-value>
+                <h4> {{ site.maximumValue.renderedValue }} </h4>
+            </md-card-content>
+        </div>
+        
+    </md-card>
+
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Total Energy</h2>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-margin="5">
+
+            <ma-svg ng-include="'/modules/mangoUI/web/img/Enchufe.svg'" flex="40"></ma-svg>
+            <md-card-content>
+                <ma-get-point-value point="site.energyTotal"></ma-get-point-value>
+                <h4> {{ site.energyTotal.renderedValue }} </h4>
+            </md-card-content>
+
+        </div>
+    </md-card>
+    
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Total Cost</h2>
+            </div>
+            <div layout="row" layout-margin="5">    
+                <ma-svg ng-include="'/modules/mangoUI/web/img/dolar.svg'" flex="40"></ma-svg>
+                <md-card-content >
+                    <ma-get-point-value point="site.costTotal"></ma-get-point-value>
+                    <h4> {{ site.costTotal.renderedValue }} EEUU</h4>
+                </md-card-content>
+            </div>
+        </md-toolbar>
+    </md-card>
+</div>
+
+<div layout="row"  ng-repeat="(build,site) in $ctrl.buildingPoints">
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Energy metrics</h2>
+            </div>
+        </md-toolbar>
+
+        <md-card-content layout="column" class="layout-column">
+            <md-list class="md-dense md-mangoDark-theme" role="list">
+
+                <md-list-item layout  role="listitem" class="md-no-proxy _md layout-row">
+                    <h3>Line-to-Neutral Voltage (V)</h3>
+                    <div class="md-secondary-container"></div>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-neutral Voltage 1  &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineNeutral1"></ma-get-point-value>
+                    <p>{{ site.vLineNeutral1.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-neutral Voltage 2  &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineNeutral2"></ma-get-point-value>
+                    <p>{{ site.vLineNeutral2.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-neutral Voltage 3  &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineNeutral3"></ma-get-point-value>
+                    <p>{{ site.vLineNeutral3.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                    Line-to-neutral Voltage Average
+                    <span flex="50" class="flex"></span>
+                    <ma-get-point-value point="site.vLineNeutralAverage"></ma-get-point-value>
+                    <p>{{ site.vLineNeutralAverage.renderedValue }}</p>
+                </md-list-item>
+            </md-list>
+            <md-divider class="md-mangoDark-theme"></md-divider>
+
+            <md-list class="md-dense md-mangoDark-theme" role="list">
+
+                <md-list-item layout  role="listitem" class="md-no-proxy _md layout-row">
+                    <h3>Line-to-Line Voltage (V)</h3>
+                    <div class="md-secondary-container"></div>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-Line Voltage 1  &nbsp &nbsp &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineLine1"></ma-get-point-value>
+                    <p>{{ site.vLineLine1.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-Line Voltage 2  &nbsp &nbsp &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineLine2"></ma-get-point-value>
+                    <p>{{ site.vLineLine2.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Line-to-Line Voltage 3  &nbsp &nbsp &nbsp &nbsp 
+                    <span flex="55" class="flex"></span>
+                    <ma-get-point-value point="site.vLineLine3"></ma-get-point-value>
+                    <p>{{ site.vLineLine3.renderedValue }}</p>
+                </md-list-item>
+
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                    Line-to-Line Voltage Average &nbsp &nbsp 
+                    <span flex="50" class="flex"></span>
+                    <ma-get-point-value point="site.vLineLineAverage"></ma-get-point-value>
+                    <p>{{ site.vLineLineAverage.renderedValue }}</p>
+                </md-list-item>
+            </md-list>
+            <md-divider class="md-mangoDark-theme"></md-divider>
+
+            <md-list class="md-dense md-mangoDark-theme" role="list">
+
+                    <md-list-item layout  role="listitem" class="md-no-proxy _md layout-row">
+                        <h3>Current (A)</h3>
+                        <div class="md-secondary-container"></div>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Current 1  
+                        <span flex="75" class="flex"></span>
+                        <ma-get-point-value point="site.current1"></ma-get-point-value>
+                        <p>{{ site.current1.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Current 2 
+                        <span flex="75" class="flex"></span>
+                        <ma-get-point-value point="site.current2"></ma-get-point-value>
+                        <p>{{ site.current2.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Current 3 
+                        <span flex="75" class="flex"></span>
+                        <ma-get-point-value point="site.current3"></ma-get-point-value>
+                        <p>{{ site.current3.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Current Total &nbsp 
+                        <span flex="70" class="flex"></span>
+                        <ma-get-point-value point="site.currentAverage"></ma-get-point-value>
+                        <p>{{ site.currentAverage.renderedValue }}</p>
+                    </md-list-item>
+            </md-list>
+            <md-divider class="md-mangoDark-theme"></md-divider>
+
+            <md-list class="md-dense md-mangoDark-theme" role="list">
+
+                    <md-list-item layout  role="listitem" class="md-no-proxy _md layout-row">
+                        <h3>Power Factor (#Units)</h3>
+                        <div class="md-secondary-container"></div>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            PF 1   &nbsp &nbsp 
+                        <span flex="80" class="flex"></span>
+                        <ma-get-point-value point="site.fp1"></ma-get-point-value>
+                        <p>{{ site.fp1.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            PF 2  &nbsp &nbsp 
+                        <span flex="80" class="flex"></span>
+                        <ma-get-point-value point="site.fp2"></ma-get-point-value>
+                        <p>{{ site.fp2.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            PF 3  &nbsp &nbsp 
+                        <span flex="80" class="flex"></span>
+                        <ma-get-point-value point="site.fp3"></ma-get-point-value>
+                        <p>{{ site.fp3.renderedValue }}</p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        FP Average
+                        <span flex="75" class="flex"></span>
+                        <ma-get-point-value point="site.fpAverage"></ma-get-point-value>
+                        <p>{{ site.fpAverage.renderedValue }}</p>
+                    </md-list-item>
+            </md-list>
+            <md-divider class="md-mangoDark-theme"></md-divider>
+
+            <md-list class="md-dense md-mangoDark-theme" role="list">
+
+                    <md-list-item layout  role="listitem" class="md-no-proxy _md layout-row">
+                        <h3>Active Power (W)</h3>
+                        <div class="md-secondary-container"></div>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Active Power 1   &nbsp &nbsp 
+                        <span flex="60" class="flex"></span>
+                        <ma-get-point-value point="site.power1"></ma-get-point-value>
+                            <p> {{ site.power1.renderedValue }} </p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Active Power 2  &nbsp &nbsp 
+                        <span flex="60" class="flex"></span>
+                        <ma-get-point-value point="site.power2"></ma-get-point-value>
+                            <p> {{ site.power2.renderedValue }} </p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Active Power 3  &nbsp &nbsp 
+                        <span flex="60" class="flex"></span>
+                        <ma-get-point-value point="site.power3"></ma-get-point-value>
+                        <p> {{ site.power3.renderedValue }} </p>
+                    </md-list-item>
+    
+                    <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                            Active Power Total &nbsp &nbsp 
+                        <span flex="55" class="flex"></span>
+                        <ma-get-point-value point="site.powerTotal"></ma-get-point-value>
+                            <p> {{ site.powerTotal.renderedValue }} </p>
+                    </md-list-item>
+            </md-list>
+            <md-divider class="md-mangoDark-theme"></md-divider>
+
+            <md-list>
+                <md-list-item role="listitem" class="md-no-proxy _md layout-row">
+                        Frecuency 
+                    <span flex="70" class="flex"></span>
+                    <ma-get-point-value point="site.frecuency"></ma-get-point-value>
+                        <p> {{ site.frecuency.renderedValue }} </p>
+                </md-list-item>
+            </md-list>
+
+        </md-card-content>
+
+    </md-card>
+            
+    <md-card flex="50" class="md-hue-2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                    <h2 flex md-truncate layout-align="center">Historical charts</h2>
+            </div>
+        </md-toolbar>
+        <div>
+            <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Electrical Variables</span>
+            </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content>
+                <ma-point-values 
+                    point="$ctrl.energyTotal" 
+                    values="$ctrl.energyTotalValues" 
+                    from="$ctrl.maUiDateBar.from" 
+                    to="$ctrl.maUiDateBar.to" 
+                    rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                    rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                </ma-point-values>
+
+                <ma-point-values 
+                    point="$ctrl.costTotal" 
+                    values="$ctrl.costTotalValues" 
+                    from="$ctrl.maUiDateBar.from" 
+                    to="$ctrl.maUiDateBar.to" 
+                    rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                    rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                </ma-point-values>
+
+                <ma-serial-chart style="height: 480px; width: 100%"
+                    series-1-values="$ctrl.energyTotalValues"
+                    series-1-point="$ctrl.energyTotal"
+                    series-1-title="Energy (Wh)"
+                    series-2-values="$ctrl.costTotalValues"
+                    series-2-point="$ctrl.costTotal"
+                    series-2-title="Cost Total"
+                    legend="true">
+                </ma-serial-chart>
+            </md-card-content>
+        </div>
+
+        <div>
+                <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Historic Points</span>
+                </md-card-title-text>
+                </md-card-title>
+    
+                <md-card-content>
+                    <ma-point-values 
+                        point="$ctrl.vLineToNeutralAverage" 
+                        values="$ctrl.vLineToNeutralAverageValues" 
+                        from="$ctrl.maUiDateBar.from" 
+                        to="$ctrl.maUiDateBar.to" 
+                        rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                        rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                    </ma-point-values>
+                
+                    <ma-point-values 
+                        point="$ctrl.vLineToLineAverage" 
+                        values="$ctrl.vLineToLineAverageValues" 
+                        from="$ctrl.maUiDateBar.from" 
+                        to="$ctrl.maUiDateBar.to" 
+                        rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                        rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                    </ma-point-values>
+
+                    <ma-point-values 
+                        point="$ctrl.currentTotal" 
+                        values="$ctrl.currentTotalValues" 
+                        from="$ctrl.maUiDateBar.from" 
+                        to="$ctrl.maUiDateBar.to" 
+                        rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                        rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                    </ma-point-values>  
+
+                    <ma-point-values 
+                        point="$ctrl.powerTotal" 
+                        values="$ctrl.powerTotalValues" 
+                        from="$ctrl.maUiDateBar.from" 
+                        to="$ctrl.maUiDateBar.to" 
+                        rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                        rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+                    </ma-point-values>  
+                
+                    <ma-serial-chart style="height: 480px; width: 100%"
+                        series-1-values="$ctrl.vLineToNeutralAverageValues"
+                        series-1-point="$ctrl.vLineToNeutralAverage"
+                        series-1-title="V line to neutral (V)"
+                        series-2-values="$ctrl.vLineToLineAverageValues"
+                        series-2-point="$ctrl.vLineToLineAverage"
+                        series-2-title="V line to line (v)"
+                        series-3-values="$ctrl.currentTotalValues"
+                        series-3-point="$ctrl.currentTotal"
+                        series-3-point="Current Total"
+                        series-4-values="$ctrl.powerTotalValues"
+                        series-4-point="$ctrl.powerTotal"
+                        series-4-point="Power Total"
+                        legend="true">
+                    </ma-serial-chart>
+                </md-card-content>
+            </div>
+    </md-card>
+</div>

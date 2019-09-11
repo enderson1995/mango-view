@@ -1,0 +1,131 @@
+<md-card flex>
+    <md-card-content>
+        <div layout="row" layout-align="space-between start" >
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select building:</label>
+                <md-select ng-model="$ctrl.site" ng-change="$ctrl.siteChanged()">
+                    <md-option ng-repeat="(build,site) in $ctrl.building" value="{{site}}">
+                        {{site}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select floor:</label>
+                <md-select ng-model="$ctrl.floor" ng-change="$ctrl.floorChanged()">
+                    <md-option ng-repeat="(build,floor) in $ctrl.floors" value="{{floor}}">
+                        {{floor}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="50" flex-gt-xs="40">
+                <label>Select apartment:</label>
+                <md-select ng-model="$ctrl.apartment" ng-change="$ctrl.apartmentChanged()">
+                    <md-option ng-repeat="(build,apartment) in $ctrl.apartments" value="{{apartment}}">
+                        {{apartment}}
+                    </md-option>
+                </md-select>
+            </md-input-container>    
+
+        </div>
+    </md-card-content>
+</md-card>
+
+<div layout='row' >
+    <md-card flex="40"  class="layout-column" >
+        <md-card-content layout="column">
+
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Energy for period</h4> 
+                <span flex="35" class="flex"></span>
+                <ma-get-point-value point="$ctrl.energyTotal"></ma-get-point-value>
+                <h4>{{$ctrl.energyTotal.renderedValue}}</h4>
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Cost for period  &nbsp  &nbsp</h4> 
+                <span flex="35" class="flex"></span>
+                <ma-get-point-value point="$ctrl.costTotal"></ma-get-point-value> 
+                <h4>{{$ctrl.costTotal.renderedValue}}&nbsp EEUU</h4>
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Conection status</h4>
+                <span flex="40" class="flex"></span>
+                <ma-get-point-value point="$ctrl.status"></ma-get-point-value>
+                <ma-svg ng-if="$ctrl.status.value" ng-include="'/modules/mangoUI/web/img/verde.svg'" flex="15"></ma-svg>
+                <ma-svg ng-if="!$ctrl.status.value" ng-include="'/modules/mangoUI/web/img/rojo.svg'" flex="15"></ma-svg>
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Next bill</h4>
+                <span flex="50" class="flex"></span>
+                <ma-get-point-value point="$ctrl.nextValue"></ma-get-point-value>
+                <h4>{{$ctrl.nextValue.value}}</h4> 
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Past due payment</h4>
+                <span flex="45" class="flex"></span>
+                <ma-get-point-value point="$ctrl.pastDuePayment"></ma-get-point-value>
+                <h4>{{$ctrl.pastDuePayment.value}}</h4> 
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Line to neutral average</h4>
+                <span flex="30" class="flex"></span>
+                <ma-get-point-value point="$ctrl.vLineToNeutralAverage"></ma-get-point-value>
+                <h4 >{{$ctrl.vLineToNeutralAverage.renderedValue}}</h4> 
+            </div>
+            <div layout ="row" layout-padding="5" layout-aling="start center">
+                <h4>Active power total</h4>
+                <span flex="35" class="flex"></span>
+                <ma-get-point-value point="$ctrl.powerTotal"></ma-get-point-value>
+                <h4>&nbsp  {{$ctrl.powerTotal.renderedValue}}</h4> 
+            </div>
+            
+        </md-card-content>
+    </md-card>
+
+    <md-card flex="">
+        <md-card-content>
+            <ma-point-values 
+                point="$ctrl.energyTotal" 
+                values="$ctrl.energyTotalValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">            
+            </ma-point-values>
+
+            <ma-point-values 
+                point="$ctrl.costTotal" 
+                values="$ctrl.costTotalValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">            
+            </ma-point-values>
+
+            <ma-point-values 
+                point="$ctrl.vLineToNeutralAverage" 
+                values="$ctrl.vLineToNeutralAverageValues" 
+                from="$ctrl.maUiDateBar.from" 
+                to="$ctrl.maUiDateBar.to" 
+                rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+                rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+            </ma-point-values>
+
+            <ma-serial-chart style="height: 480px; width: 100%"
+                series-1-values="$ctrl.energyTotalValues"
+                series-1-point="$ctrl.energyTotal"
+                series-1-title="Energy (Wh)"
+                series-2-values="$ctrl.costTotalValues"
+                series-2-point="$ctrl.costTotal"
+                series-2-title="Cost Total"
+                series-3-values="$ctrl.vLineToNeutralAverageValues"
+                series-3-point="$ctrl.vLineToNeutralAverage"
+                series-3-title="V line to neutral"
+                legend="true">
+            </ma-serial-chart>
+        </md-card-content>
+    </md-card>
+</div>
+
