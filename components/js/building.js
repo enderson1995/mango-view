@@ -53,9 +53,9 @@ define(['angular', 'require'], function(angular, require) {
         this.orderPoints = (points) => {
             
             //Crear variables a mostrar
-            this.sites.forEach(building => {
+            this.sites.forEach(sites => {
 
-                this.buildingPoints[building] = {
+                this.buildingPoints[sites] = {
                     'power1' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '1'),
                     'power2' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '2'),
                     'power3' : this.filterByNameAndBuildingAndLine(points, 'Power',this.site, '3'),
@@ -82,6 +82,7 @@ define(['angular', 'require'], function(angular, require) {
                     'fpAverage' : this.filterByNameAndBuildingAndLine(points, 'FP',this.site,'Average'),
                 };
                 
+                console.log(this.buildingPoints)
                 this.energyTotal = this.filterByNameAndBuilding(points, 'energyTotal', this.site);
                 this.costTotal = this.filterByNameAndBuilding(points, 'costTotal', this.site);
                 this.vLineToNeutralAverage = this.filterByNameAndBuildingAndLine(points, 'vLineToNeutral',this.site,'Average');
