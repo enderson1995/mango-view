@@ -128,8 +128,9 @@ define(['angular', 'require'], function(angular, require) {
                 this.powerTotal = this.filterByName(points, 'powerTotal');
                 this.energyTotal = this.filterByName(points, 'energyTotal');
                 this.costTotal = this.filterByName(points, 'costTotal');
+                this.status = false;
 
-                console.log(this.vLineToNeutralAverage)
+                console.log(this.status)
             });
         };
 
